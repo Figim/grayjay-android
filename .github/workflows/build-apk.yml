@@ -13,11 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        # Avtomatik submodulları söndürürük ki, xarab linklərə görə xəta verməsin
 
-      - name: Initialize only required Futopay submodule
+      - name: Create dummy dep/futopay folder to satisfy build
         run: |
-          git submodule update --init dep/futopay
+          mkdir -p dep/futopay/android
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
