@@ -14,9 +14,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Initialize required submodules
+      - name: Fix submodule URLs and initialize
         run: |
-          # Yalnız əsas tələb olunan iki vacib submodulu işə salırıq
+          # Submodul ünvanlarını rəsmi public mənbələrə yönəldirik
+          git config submodule.dep/polycentricandroid.url https://gitlab.futo.org/videostreaming/polycentricandroid.git || true
+          git config submodule.dep/futopay.url https://gitlab.futo.org/videostreaming/futopay.git || true
+          
+          # Submodulları yeniləyirik
           git submodule update --init dep/polycentricandroid dep/futopay
 
       - name: Set up JDK 17
