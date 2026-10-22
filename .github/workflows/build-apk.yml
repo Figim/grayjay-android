@@ -1,4 +1,4 @@
-name: Build Nightly APK
+name: Build Grayjay Nightly APK
 
 on:
   push:
@@ -11,17 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Fix submodule URLs and initialize
+      - name: Clone official FUTO GitLab repository with all submodules
         run: |
-          # Submodul ünvanlarını rəsmi public mənbələrə yönəldirik
-          git config submodule.dep/polycentricandroid.url https://gitlab.futo.org/videostreaming/polycentricandroid.git || true
-          git config submodule.dep/futopay.url https://gitlab.futo.org/videostreaming/futopay.git || true
-          
-          # Submodulları yeniləyirik
-          git submodule update --init dep/polycentricandroid dep/futopay
+          git clone --recurse-submodules https://gitlab.futo.org/videostreaming/grayjay.git .
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
